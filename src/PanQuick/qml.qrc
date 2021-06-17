@@ -2,5 +2,30 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Title.qml</file>
+        <file>panview.qml</file>
+        <file>CostomButton.qml</file>
+        <file>CostomTableView.qml</file>
+        <file>CustomTabView.qml</file>
+        <file>MultiTabView.qml</file>
+        <file>PathNav.qml</file>
+        <file>QuickTitle.qml</file>
+        <file>WebViewTemplate.qml</file>
+        <file>GlobalColor.qml</file>
+        <file>DefaultFrame.qml</file>
+        <file>ListMenu.qml</file>
+        <file>js/navigation.js</file>
+        <file>js/navigatQml.qml</file>
+        <file>CloseMessage.qml</file>
+        <file>InquiryMessage.qml</file>
+        <file>RenameBox.qml</file>
+        <file>FileSaveDialog.qml</file>
+        <file>SucceedToolTip.qml</file>
+        <file>WarningToolTip.qml</file>
+        <file>ShareDialog.qml</file>
+        <file>ShareCopyUrlWindow.qml</file>
+        <file>DownloadManage.qml</file>
+        <file>InputPassword.qml</file>
+        <file>FileListManage.qml</file>
+        <file>VcCodeWindow.qml</file>
     </qresource>
 </RCC>

@@ -13,8 +13,8 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{846FACF9-65A7-3294-8136-C46A379AEA0B}</ProjectGuid>
     <RootNamespace>PanQuick</RootNamespace>
-    <Keyword>Qt4VSv1.0</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>QtVS_v301</Keyword>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -27,10 +27,10 @@
     <PrimaryOutput>PanQuick</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <PlatformToolSet>v140</PlatformToolSet>
+    <PlatformToolSet>v140_xp</PlatformToolSet>
     <OutputDirectory>debug\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
     <IntermediateDirectory>debug\</IntermediateDirectory>
     <PrimaryOutput>PanQuick</PrimaryOutput>
@@ -42,9 +42,6 @@
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
     <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
   </Target>
-  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
-    <Import Project="$(QtMsBuild)\qt.props" />
-  </ImportGroup>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
@@ -53,6 +50,20 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <QtInstall>nsvc2015</QtInstall>
+    <QtModules>core;network;gui;widgets;qml;webchannel;quick;webengine</QtModules>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <QtInstall>nsvc2015</QtInstall>
+    <QtModules>core;network;gui;widgets;qml;webchannel;quick;webengine</QtModules>
+  </PropertyGroup>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
   <PropertyGroup>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
@@ -66,7 +77,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;release;$(QTDIR)\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;..\..\include;$(QTDIR)\include;release;$(QTDIR)\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -75,7 +86,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_DEBUG;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -86,7 +97,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;shell32.lib;$(QTDIR)\lib\Qt5Quick.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Qml.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\utils\postgresql\pgsql\lib;C:\utils\my_sql\my_sql\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -104,28 +115,24 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_DEBUG;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_DEBUG;QT_WEBENGINE_LIB;QT_WEBENGINECORE_LIB;QT_QUICK_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_WEBCHANNEL_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <QtMoc>
-      <QTDIR>$(QTDIR)</QTDIR>
-      <OutputFile>$(Configuration)\moc_%(Filename).cpp</OutputFile>
-      <Define>UNICODE;$(Platform);QT_NO_DEBUG;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;_MSC_VER=1900;_$(Platform)</Define>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
-      <InputFile>%(FullPath)</InputFile>
       <DynamicSource>output</DynamicSource>
-      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(QTDIR)\mkspecs/$(Platform)-msvc2015;.;$(QTDIR)\include;$(QTDIR)\include/QtQuick;$(QTDIR)\include/QtGui;$(QTDIR)\include/QtANGLE;$(QTDIR)\include/QtQml;$(QTDIR)\include/QtNetwork;$(QTDIR)\include/QtCore</IncludePath>
+      <QtMocDir>$(Configuration)</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
     </QtMoc>
     <QtRcc>
-      <OutputFile>$(Configuration)\qrc_%(Filename).cpp</OutputFile>
-      <QTDIR>$(QTDIR)</QTDIR>
       <Compression>default</Compression>
       <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
-      <InputFile>%(FullPath)</InputFile>
+      <QtRccDir>$(Configuration)</QtRccDir>
+      <QtRccFileName>qrc_%(Filename).cpp</QtRccFileName>
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;debug;$(QTDIR)\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;..\..\include;$(QTDIR)\include;debug;$(QTDIR)\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -134,7 +141,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -145,7 +152,7 @@
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QTDIR)\lib\qtmaind.lib;shell32.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\utils\postgresql\pgsql\lib;C:\utils\my_sql\my_sql\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -162,65 +169,263 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_WEBENGINE_LIB;QT_WEBENGINECORE_LIB;QT_QUICK_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_WEBCHANNEL_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <QtMoc>
-      <QTDIR>$(QTDIR)</QTDIR>
-      <OutputFile>$(Configuration)\moc_%(Filename).cpp</OutputFile>
-      <Define>UNICODE;$(Platform);QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;_MSC_VER=1900;_$(Platform)</Define>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
-      <InputFile>%(FullPath)</InputFile>
       <DynamicSource>output</DynamicSource>
-      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(QTDIR)\mkspecs/$(Platform)-msvc2015;.;$(QTDIR)\include;$(QTDIR)\include/QtQuick;$(QTDIR)\include/QtGui;$(QTDIR)\include/QtANGLE;$(QTDIR)\include/QtQml;$(QTDIR)\include/QtNetwork;$(QTDIR)\include/QtCore</IncludePath>
+      <QtMocDir>$(Configuration)</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
     </QtMoc>
     <QtRcc>
-      <QTDIR>$(QTDIR)</QTDIR>
-      <OutputFile>$(Configuration)\qrc_%(Filename).cpp</OutputFile>
       <Compression>default</Compression>
       <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
-      <InputFile>%(FullPath)</InputFile>
+      <QtRccDir>$(Configuration)</QtRccDir>
+      <QtRccFileName>qrc_%(Filename).cpp</QtRccFileName>
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="baiduinterface.cpp" />
+    <ClCompile Include="cookiemangre.cpp" />
     <ClCompile Include="detector.cpp" />
+    <ClCompile Include="httprequest.cpp" />
+    <ClCompile Include="inithandle.cpp" />
     <ClCompile Include="initthread.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="systeminterface.cpp" />
+    <ClCompile Include="systemtaryicon.cpp" />
+    <ClCompile Include="treeitem.cpp" />
+    <ClCompile Include="treeviewmodel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="baiduinterface.h">
+    </QtMoc>
+    <QtMoc Include="cookiemangre.h">
+    </QtMoc>
     <QtMoc Include="detector.h">
+    </QtMoc>
+    <QtMoc Include="httprequest.h">
+    </QtMoc>
+    <QtMoc Include="inithandle.h">
     </QtMoc>
     <QtMoc Include="initthread.h">
     </QtMoc>
+    <QtMoc Include="systeminterface.h">
+    </QtMoc>
+    <QtMoc Include="systemtaryicon.h">
+    </QtMoc>
+    <ClInclude Include="treeitem.h" />
+    <QtMoc Include="treeviewmodel.h">
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
+    <None Include="2.png" />
+    <None Include="images\3gp.png" />
+    <None Include="images\7z.png" />
+    <None Include="CloseMessage.qml" />
+    <None Include="CostomButton.qml" />
+    <None Include="CostomTableView.qml" />
+    <None Include="CustomTabView.qml" />
+    <None Include="DefaultFrame.qml" />
+    <None Include="DownloadManage.qml" />
+    <None Include="FileSaveDialog.qml" />
+    <None Include="GlobalColor.qml" />
+    <None Include="InputPassword.qml" />
+    <None Include="InquiryMessage.qml" />
+    <None Include="ListMenu.qml" />
+    <None Include="MultiTabView.qml" />
+    <None Include="PathNav.qml" />
+    <None Include="QuickTitle.qml" />
+    <None Include="RenameBox.qml" />
+    <None Include="ShareCopyUrlWindow.qml" />
+    <None Include="ShareDialog.qml" />
+    <None Include="SucceedToolTip.qml" />
+    <None Include="images\Tarylogo.ico" />
     <None Include="Title.qml" />
+    <None Include="WarningToolTip.qml" />
+    <None Include="WebViewTemplate.qml" />
+    <None Include="images\aac.png" />
+    <None Include="images\acc.png" />
+    <None Include="images\ace.png" />
+    <None Include="images\add_hot.png" />
+    <None Include="images\add_normal.png" />
+    <None Include="images\ai.png" />
+    <None Include="images\aiff.png" />
+    <None Include="images\amr.png" />
+    <None Include="images\ape.png" />
+    <None Include="images\apk.png" />
+    <None Include="images\asf.png" />
+    <None Include="images\avi.png" />
+    <None Include="images\baidu.svg" />
+    <None Include="images\bak.png" />
+    <None Include="images\bangzhu@1x.png" />
+    <None Include="images\bangzhu_xuanting.png" />
+    <None Include="images\bangzhu" />
+    <None Include="images\bat.png" />
+    <None Include="images\bmp.png" />
+    <None Include="images\bt.png" />
     <None Include="images\button-close.png" />
     <None Include="images\button-min.png" />
+    <None Include="images\c.png" />
+    <None Include="images\cab.png" />
+    <None Include="images\chm.png" />
+    <None Include="images\close.png" />
+    <None Include="images\close2_normal.png" />
+    <None Include="images\close2_pushed.png" />
+    <None Include="images\collaps.png" />
+    <None Include="images\comm_code.png" />
+    <None Include="images\comm_music.png" />
+    <None Include="images\comm_null.png" />
+    <None Include="images\comm_seting.png" />
+    <None Include="images\comm_txt.png" />
+    <None Include="images\comm_video.png" />
+    <None Include="images\comm_zip.png" />
+    <None Include="copy" />
+    <None Include="images\dat.png" />
+    <None Include="images\detail-bj.png" />
+    <None Include="images\dl_pause.png" />
+    <None Include="images\dl_pause_hot.png" />
+    <None Include="images\dl_start.png" />
+    <None Include="images\dl_start_hot.png" />
+    <None Include="images\dl_stop.png" />
+    <None Include="images\dl_stop_hot.png" />
+    <None Include="images\dmg.png" />
+    <None Include="images\doc.png" />
+    <None Include="images\docx.png" />
+    <None Include="images\dps.png" />
+    <None Include="images\eps.png" />
+    <None Include="images\et.png" />
+    <None Include="images\exe.png" />
+    <None Include="images\expand.png" />
+    <None Include="images\file_back_disabled.png" />
+    <None Include="images\file_back_hot.png" />
+    <None Include="images\file_back_normal.png" />
+    <None Include="images\file_forward_disabled.png" />
+    <None Include="images\file_forward_hot.png" />
+    <None Include="images\file_forward_normal.png" />
+    <None Include="images\file_home_disabled.png" />
+    <None Include="images\file_home_hot.png" />
+    <None Include="images\file_home_normal.png" />
+    <None Include="images\file_refresh_disabled.png" />
+    <None Include="images\file_refresh_hot.png" />
+    <None Include="images\file_refresh_normal.png" />
+    <None Include="images\file_search_disabled.png" />
+    <None Include="images\file_search_hot.png" />
+    <None Include="images\file_search_normal.png" />
+    <None Include="images\fla.png" />
+    <None Include="images\flac.png" />
+    <None Include="images\flv.png" />
+    <None Include="images\folder.png" />
+    <None Include="images\folder_coll.png" />
+    <None Include="images\folder_exp.png" />
+    <None Include="images\folder_hot.png" />
+    <None Include="images\folder_oepn.png" />
+    <None Include="images\fon.png" />
+    <None Include="images\gif.png" />
+    <None Include="images\hlp.png" />
     <None Include="images\hover-close.png" />
     <None Include="images\hover-minimize.png" />
+    <None Include="images\htm.png" />
+    <None Include="images\html.png" />
+    <None Include="images\icon-eye.png" />
+    <None Include="images\icon-triangle.png" />
+    <None Include="images\inquiry.png" />
+    <None Include="images\ipa.png" />
+    <None Include="images\iso.png" />
+    <None Include="images\jar.png" />
+    <None Include="images\jpeg.png" />
+    <None Include="images\jpg.png" />
+    <None Include="images\key.png" />
+    <None Include="images\keynote.png" />
+    <None Include="images\link.png" />
+    <None Include="images\log.png" />
     <None Include="images\logo-happy.png" />
     <None Include="images\logo-sad.png" />
     <None Include="images\logo-start.png" />
+    <None Include="images\m4a.png" />
     <None Include="main.qml" />
+    <None Include="images\max.png" />
+    <None Include="images\menu.png" />
+    <None Include="images\mid.png" />
+    <None Include="images\midi.png" />
+    <None Include="images\min.png" />
+    <None Include="images\mkv.png" />
+    <None Include="images\mod.png" />
+    <None Include="images\mov.png" />
+    <None Include="images\mp3.png" />
+    <None Include="images\mp4.png" />
+    <None Include="images\mpe.png" />
+    <None Include="images\mpeg.png" />
+    <None Include="images\mpg.png" />
+    <None Include="images\msg.png" />
+    <None Include="images\msi.png" />
+    <None Include="js\navigatQml.qml" />
+    <None Include="js\navigation.js" />
+    <None Include="images\normal.png" />
+    <None Include="images\note.png" />
+    <None Include="images\numbers.png" />
+    <None Include="images\ogg.png" />
+    <None Include="images\old.png" />
+    <None Include="images\otf.png" />
+    <None Include="images\pages.png" />
+    <None Include="panview.qml" />
+    <None Include="images\pdf.png" />
+    <None Include="images\png.png" />
+    <None Include="images\ppt.png" />
+    <None Include="images\pptx.png" />
+    <None Include="images\psd.png" />
     <QtRcc Include="qml.qrc">
       <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">qml</InitFuncName>
       <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">qml</InitFuncName>
     </QtRcc>
+    <None Include="images\rar.png" />
     <QtRcc Include="resource.qrc">
       <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">resource</InitFuncName>
       <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">resource</InitFuncName>
     </QtRcc>
+    <None Include="images\restore.png" />
+    <None Include="images\rm.png" />
+    <None Include="images\rp.png" />
+    <None Include="images\rtf.png" />
+    <None Include="images\rtttl.png" />
+    <None Include="images\selected.png" />
+    <None Include="images\shadow.png" />
+    <None Include="images\skin.png" />
+    <None Include="images\successd.png" />
+    <None Include="images\swf.png" />
+    <None Include="images\tar.png" />
+    <None Include="images\tmp.png" />
+    <None Include="images\ttc.png" />
+    <None Include="images\ttf.png" />
+    <None Include="images\txt.png" />
+    <None Include="images\user.svg" />
+    <None Include="images\uue.png" />
+    <None Include="images\vsd.png" />
+    <None Include="images\warning.png" />
+    <None Include="images\wav.png" />
+    <None Include="images\wave.png" />
+    <None Include="images\webm.png" />
+    <None Include="images\webp.png" />
+    <None Include="images\window_shadow.png" />
+    <None Include="images\wma.png" />
+    <None Include="images\wmf.png" />
+    <None Include="images\wmv.png" />
+    <None Include="images\wps.png" />
+    <None Include="images\xls.png" />
+    <None Include="images\xlsx.png" />
+    <None Include="images\xmf.png" />
+    <None Include="images\xmin.png" />
+    <None Include="images\xml.png" />
+    <None Include="images\zip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include=".\PanQuick_resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
   </ImportGroup>
   <ImportGroup Label="ExtensionTargets" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties Qt5Version_x0020_Win32="msvc201598" />
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>

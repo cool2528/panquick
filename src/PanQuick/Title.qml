@@ -1,4 +1,4 @@
-﻿import QtQuick 2.0
+﻿import QtQuick 2.7
 
 Rectangle{
     id:titleRect
@@ -33,6 +33,7 @@ Rectangle{
             id:closeImg
             x:11
             y:11
+            z:1
             width: 19
             height: 19
             anchors.horizontalCenter: parent.horizontalCenter

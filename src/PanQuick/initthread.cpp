@@ -13,4 +13,5 @@ InitThread::InitThread(Detector *detector)
 void InitThread::run()
 {
     //线程执行
+    m_detector->run();
 }

@@ -1,0 +1,14 @@
+/.vs
+*.filters
+*.vcxproj
+*.sln
+*.dll
+*.exe
+*.zip
+*.rar
+*.7z
+*.vcxproj.user
+/debug
+/release
+/Win32
+/GeneratedFiles
